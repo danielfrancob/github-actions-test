@@ -20,4 +20,4 @@ jobs:
       - name: Generate Jar file
         run: gradle build
       - name: Run generated Jar file
-        run: java -jar ./app/build/lib/app.jar
+        run: java -jar ./app/build/libs/app.jar

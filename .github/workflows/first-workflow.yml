@@ -1,0 +1,24 @@
+name: first-workflow
+on:
+  push:
+    branches: [ "feature/first-workflow" ]
+jobs:
+  first-workflow:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: "17"
+          distribution: "temurin"
+          server-id: "github"
+          settings-path: ${{ github-workspace }}
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: 8.5
+      - name: Generate Jar file
+        run: ./gradlew build
+      - name: Run generated Jar file
+        run: java -jar ./app/build/lib/app.jar

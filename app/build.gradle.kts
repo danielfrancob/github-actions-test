@@ -19,3 +19,7 @@ java {
 application {
     mainClass.set("com.example.app.App")
 }
+
+tasks.jar {
+    manifest.attributes["Main-Class"] = "com.example.app.App"
+}

@@ -18,6 +18,6 @@ jobs:
         with:
           gradle-version: 8.5
       - name: Generate Jar file
-        run: ./gradlew build
+        run: gradle build
       - name: Run generated Jar file
         run: java -jar ./app/build/lib/app.jar

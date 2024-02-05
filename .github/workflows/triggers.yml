@@ -8,13 +8,13 @@ on:
         description: "What do you want to execute?"
         required: true
         type: choice
-        default: Test
+        default: "Test"
         options:
-          - Run
-          - Test
+          - "Run"
+          - "Test"
 jobs:
   project-test:
-    if: ${{ inputs.action == Test }}
+    if: ${{ inputs.action == 'Test' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout branch
@@ -34,7 +34,7 @@ jobs:
       - name: Run generated Jar file
         run: java -jar ./app/build/libs/app.jar
   project-run:
-    if: ${{ inputs.action == Test }}
+    if: ${{ inputs.action == 'Run' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout branch

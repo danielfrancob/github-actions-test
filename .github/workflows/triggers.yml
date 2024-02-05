@@ -6,10 +6,10 @@ on:
         description: "What do you want to execute?"
         required: true
         type: choice
-        default: "Test"
+        default: Test
         options:
-          - "Run"
-          - "Test"
+          - Run
+          - Test
 jobs:
   project-test:
     if: ${{ github.event.inputs.action == 'Test' }}

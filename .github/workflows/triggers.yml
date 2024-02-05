@@ -1,0 +1,25 @@
+name: triggers
+on:
+  push:
+    branches:
+      - "feature/**"
+      - "develop"
+  workflow_dispatch:
+jobs:
+  project-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+      - name: Setup JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: "17"
+          distribution: "temurin"
+          server-id: "github"
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: 8.5
+      - name: Generate Jar file
+        run: gradle clean test

@@ -1,8 +1,10 @@
 name: triggers
 on:
-  workflow_dispatch:
   push:
-    branches: [ "feature/**" ]
+    branches:
+      - "feature/**"
+      - "develop"
+  workflow_dispatch:
 jobs:
   project-test:
     runs-on: ubuntu-latest
@@ -20,6 +22,4 @@ jobs:
         with:
           gradle-version: 8.5
       - name: Generate Jar file
-        run: gradle build
-      - name: Run test suite
-        run: gradle test
+        run: gradle clean test

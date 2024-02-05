@@ -31,8 +31,8 @@ jobs:
           gradle-version: 8.5
       - name: Generate Jar file
         run: gradle build
-      - name: Run generated Jar file
-        run: java -jar ./app/build/libs/app.jar
+      - name: Run test suite
+        run: gradle test
   project-run:
     if: ${{ inputs.action == 'Run' }}
     runs-on: ubuntu-latest

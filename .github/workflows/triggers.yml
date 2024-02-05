@@ -1,7 +1,5 @@
 name: triggers
 on:
-  push:
-    branches: [ "develop", "feature/**" ]
   workflow_dispatch:
     inputs:
       action:

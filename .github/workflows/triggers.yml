@@ -1,5 +1,7 @@
 name: triggers
 on:
+  push:
+    branches: [ "develop", "feature/**" ]
   workflow_dispatch:
     inputs:
       action:
@@ -12,7 +14,7 @@ on:
           - "Test"
 jobs:
   project-test:
-    if: ${{ inputs.action == 'Test' }}
+    if: ${{ github.event.inputs == 'Test' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout branch
@@ -32,7 +34,7 @@ jobs:
       - name: Run test suite
         run: gradle test
   project-run:
-    if: ${{ inputs.action == 'Run' }}
+    if: ${{ github.event.inputs == 'Run' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout branch

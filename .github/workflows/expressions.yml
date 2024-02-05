@@ -1,0 +1,54 @@
+name: expressions
+on:
+  workflow_dispatch:
+    branches:
+      - "feature/**"
+      - "develop"
+    inputs:
+      action:
+        description: "What do you want to execute?"
+        required: true
+        type: choice
+        default: "Test"
+        options:
+          - "Run"
+          - "Test"
+jobs:
+  project-test:
+    if: ${{ inputs.action == 'Test' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+      - name: Setup JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: "17"
+          distribution: "temurin"
+          server-id: "github"
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: 8.5
+      - name: Run test suite
+        run: gradle clean test
+  project-run:
+    if: ${{ inputs.action == 'Run' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+      - name: Setup JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: "17"
+          distribution: "temurin"
+          server-id: "github"
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: 8.5
+      - name: Generate Jar file
+        run: gradle build
+      - name: Run generated Jar file
+        run: java -jar ./app/build/libs/app.jar

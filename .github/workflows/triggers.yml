@@ -1,7 +1,6 @@
 name: triggers
 on:
   workflow_dispatch:
-    branches: [ "develop", "feature/**" ]
     inputs:
       action:
         description: "What do you want to execute?"
